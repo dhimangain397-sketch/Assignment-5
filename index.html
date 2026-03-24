@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,75 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
+
 <body>
-    
+
+    <section id="login-page" class="flex flex-col items-center justify-center min-h-screen">
+        <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg border border-gray-200">
+            <div class="text-center">
+                <img src="./assets/github-logo.png" class="w-12 mx-auto mb-4" alt="Logo">
+                <h1 class="text-2xl font-bold">Sign In</h1>
+                <p class="text-gray-500">To access the Issue Tracker</p>
+            </div>
+            <form id="login-form" class="space-y-4">
+                <input type="text" id="username" placeholder="Username" class="input input-bordered w-full" required />
+                <input type="password" id="password" placeholder="Password" class="input input-bordered w-full"
+                    required />
+                <button type="submit" class="btn btn-primary w-full">Sign In</button>
+            </form>
+            <div class="bg-blue-50 p-4 rounded-lg text-sm text-blue-700">
+                <p><strong>Demo Credential:</strong> admin / admin123</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="hidden">
+        <nav class="navbar bg-white border-b px-4 lg:px-12">
+            <div class="flex-1">
+                <a class="text-xl font-bold flex items-center gap-2">
+                    <img src="./assets/github-logo.png" class="w-8" alt="">
+                    <span>Issues</span>
+                </a>
+            </div>
+            <div class="flex-none gap-2">
+                <div class="join">
+                    <input id="search-input" type="text" placeholder="Search issues..."
+                        class="input input-bordered join-item input-sm w-24 md:w-auto" />
+                    <button id="search-btn" class="btn btn-sm join-item btn-primary">Search</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="p-4 lg:p-12">
+            <div class="flex gap-4 mb-8 border-b">
+                <button class="tab-btn active border-b-2 border-primary pb-2 font-semibold" data-tab="all">All</button>
+                <button class="tab-btn pb-2 text-gray-500" data-tab="open">Open</button>
+                <button class="tab-btn pb-2 text-gray-500" data-tab="closed">Closed</button>
+            </div>
+
+            <div id="loader" class="hidden flex justify-center py-10">
+                <span class="loading loading-spinner loading-lg text-primary"></span>
+            </div>
+
+            <div id="issues-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            </div>
+        </main>
+    </section>
+
+    <dialog id="issue_modal" class="modal">
+        <div class="modal-box w-11/22 max-w-2xl">
+            <h3 id="modal-title" class="font-bold text-xl"></h3>
+            <div id="modal-body" class="py-4 space-y-2"></div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="app.js"></script>
+
 </body>
+
 </html>
