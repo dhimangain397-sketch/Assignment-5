@@ -21,7 +21,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
 async function fetchIssues(query = '') {
     const container = document.getElementById('issues-container');
     const loader = document.getElementById('loader');
-
+    
     container.innerHTML = '';
     loader.classList.remove('hidden');
 
@@ -29,9 +29,9 @@ async function fetchIssues(query = '') {
         const url = query ? `${SEARCH_URL}${query}` : API_URL;
         const res = await fetch(url);
         const data = await res.json();
-
-        allIssues = Array.isArray(data) ? data : (data.data || []);
-
+        
+        allIssues = Array.isArray(data) ? data : (data.data || []); 
+        
         renderData(allIssues);
     } catch (err) {
         console.error("Fetch error:", err);
