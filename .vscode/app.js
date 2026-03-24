@@ -83,3 +83,22 @@ document.getElementById('search-input').addEventListener('keypress', (e) => {
         fetchIssues(e.target.value);
     }
 });
+
+// --- Modal Detail ---
+async function showDetails(id) {
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const issue = await res.json();
+    
+    document.getElementById('modal-title').innerText = issue.title;
+    document.getElementById('modal-body').innerHTML = `
+        <p class="text-gray-700">${issue.description}</p>
+        <div class="divider"></div>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+            <div><strong>Status:</strong> ${issue.status}</div>
+            <div><strong>Priority:</strong> ${issue.priority}</div>
+            <div><strong>Author:</strong> ${issue.author}</div>
+            <div><strong>Created:</strong> ${new Date(issue.createdAt).toLocaleString()}</div>
+        </div>
+    `;
+    issue_modal.showModal();
+}
