@@ -60,3 +60,26 @@ function renderData(data) {
         </div>
     `).join('');
 }
+
+// --- Filtering & Search ---
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'border-b-2', 'border-primary', 'font-semibold'));
+        e.target.classList.add('active', 'border-b-2', 'border-primary', 'font-semibold');
+
+        const filter = e.target.getAttribute('data-tab');
+        if (filter === 'all') {
+            renderData(allIssues);
+        } else {
+            const filtered = allIssues.filter(i => i.status === filter);
+            renderData(filtered);
+        }
+    });
+});
+
+
+document.getElementById('search-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        fetchIssues(e.target.value);
+    }
+});
